@@ -1,0 +1,544 @@
+******************************************************************************
+                  TI ARM Linker PC v16.9.7                     
+******************************************************************************
+>> Linked Tue May 29 16:11:42 2018
+
+OUTPUT FILE NAME:   <imped.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00000bb5
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00040000  000015c6  0003ea3a  R  X
+  SRAM                  20000000   00008000  000006a0  00007960  RW X
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    000015d0   000015d0    r-x
+  00000000    00000000    0000026c   0000026c    r-- .intvecs
+  0000026c    0000026c    00000588   00000588    r-- .constdata
+  000007f4    000007f4    0000053c   0000053c    r-x .text
+  00000d30    00000d30    00000154   00000154    r-x i.SysCtlClockGet
+  00000e84    00000e84    00000138   00000138    r-x i.GPIOPadConfigSet
+  00000fbc    00000fbc    00000120   00000120    r-x i.SysCtlClockSet
+  000010dc    000010dc    00000080   00000080    r-x i.uDMAChannelTransferSet
+  0000115c    0000115c    0000006e   0000006e    r-x i.UARTConfigSetExpClk
+  000011cc    000011cc    00000064   00000064    r-x i.IntEnable
+  00001230    00001230    00000060   00000060    r-x i.TimerConfigure
+  00001290    00001290    00000044   00000044    r-x i.GPIOPinConfigure
+  000012d4    000012d4    0000002e   0000002e    r-x .emb_text
+  00001302    00001302    00000028   00000028    r-x i.GPIODirModeSet
+  0000132c    0000132c    00000028   00000028    r-x i.SysCtlPeripheralEnable
+  00001354    00001354    00000020   00000020    r-x i.uDMAChannelControlSet
+  00001374    00001374    0000001c   0000001c    r-x i.GPIOPinTypeGPIOOutput
+  00001390    00001390    0000001c   0000001c    r-x i.GPIOPinTypeUART
+  000013ac    000013ac    00000014   00000014    r-x i.uDMAChannelEnable
+  000013c0    000013c0    00000012   00000012    r-x i.TimerLoadSet
+  000013d2    000013d2    0000000e   0000000e    r-x i.IntMasterEnable
+  000013e0    000013e0    0000000e   0000000e    r-x i.TimerEnable
+  000013f0    000013f0    0000000c   0000000c    r-x i.uDMAControlBaseSet
+  000013fc    000013fc    0000000c   0000000c    r-x i.uDMAEnable
+  00001408    00001408    00000008   00000008    r-x i.TimerIntEnable
+  00001410    00001410    00000008   00000008    r-x i.UARTIntEnable
+  00001418    00001418    00000006   00000006    r-x i.GPIOPinWrite
+  0000141e    0000141e    00000006   00000006    r-x i.UARTClockSourceSet
+  00001424    00001424    00000048   00000048    r-x i.uDMAChannelAttributeDisable
+  0000146c    0000146c    0000003c   0000003c    r-x i.SysCtlPeripheralReset
+  000014a8    000014a8    0000002c   0000002c    r-x i.uDMAChannelAssign
+  000014d4    000014d4    00000028   00000028    r-x i.SysCtlPeripheralDisable
+  000014fc    000014fc    00000004   00000004    r-x i.TimerDMAEventSet
+  00001500    00001500    00000004   00000004    r-x i.TimerIntClear
+  00001508    00001508    000000c8   000000c8    r-- .cinit
+20000000    20000000    000006a0   00000000    rw-
+  20000000    20000000    00000400   00000000    rw- .bss
+  20000400    20000400    00000200   00000000    rw- .stack
+  20000600    20000600    000000a0   00000000    rw- .data
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    0000026c     
+                  00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
+
+.constdata 
+*          0    0000026c    00000588     
+                  0000026c    00000254     driverlib.lib : sysctl.o (.constdata)
+                  000004c0    00000228                   : gpio.o (.constdata)
+                  000006e8    0000010c                   : interrupt.o (.constdata)
+
+.text      0    000007f4    0000053c     
+                  000007f4    000001d0     main.obj (.text)
+                  000009c4    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.obj (.text)
+                  00000a60    0000007a                                   : memset_t2.obj (.text)
+                  00000ada    00000002                                   : mpu_init.obj (.text)
+                  00000adc    00000070                                   : autoinit.obj (.text)
+                  00000b4c    00000068                                   : copy_decompress_lzss.obj (.text:decompress:lzss)
+                  00000bb4    00000054                                   : boot.obj (.text)
+                  00000c08    00000054                                   : exit.obj (.text)
+                  00000c5c    0000004c                                   : cpy_tbl.obj (.text)
+                  00000ca8    00000018                                   : args_main.obj (.text)
+                  00000cc0    00000014                                   : _lock.obj (.text)
+                  00000cd4    0000000e                                   : copy_decompress_none.obj (.text:decompress:none)
+                  00000ce2    0000000c                                   : copy_zero_init.obj (.text:decompress:ZI)
+                  00000cee    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
+                  00000cfa    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.obj (.text)
+                  00000cfe    00000002                                   : startup.obj (.text)
+                  00000d00    00000008     driverlib.lib : timer.o (.tramp.TimerIntClear.1)
+                  00000d08    00000008                   : udma.o (.tramp.uDMAChannelAttributeDisable.1)
+                  00000d10    00000008                   : udma.o (.tramp.uDMAChannelAssign.1)
+                  00000d18    00000008                   : timer.o (.tramp.TimerDMAEventSet.1)
+                  00000d20    00000008                   : sysctl.o (.tramp.SysCtlPeripheralReset.1)
+                  00000d28    00000008                   : sysctl.o (.tramp.SysCtlPeripheralDisable.1)
+
+i.SysCtlClockGet 
+*          0    00000d30    00000154     
+                  00000d30    00000154     driverlib.lib : sysctl.o (i.SysCtlClockGet)
+
+i.GPIOPadConfigSet 
+*          0    00000e84    00000138     
+                  00000e84    00000138     driverlib.lib : gpio.o (i.GPIOPadConfigSet)
+
+i.SysCtlClockSet 
+*          0    00000fbc    00000120     
+                  00000fbc    00000120     driverlib.lib : sysctl.o (i.SysCtlClockSet)
+
+i.uDMAChannelTransferSet 
+*          0    000010dc    00000080     
+                  000010dc    00000080     driverlib.lib : udma.o (i.uDMAChannelTransferSet)
+
+i.UARTConfigSetExpClk 
+*          0    0000115c    0000006e     
+                  0000115c    0000006e     driverlib.lib : uart.o (i.UARTConfigSetExpClk)
+
+i.IntEnable 
+*          0    000011cc    00000064     
+                  000011cc    00000064     driverlib.lib : interrupt.o (i.IntEnable)
+
+i.TimerConfigure 
+*          0    00001230    00000060     
+                  00001230    00000060     driverlib.lib : timer.o (i.TimerConfigure)
+
+i.GPIOPinConfigure 
+*          0    00001290    00000044     
+                  00001290    00000044     driverlib.lib : gpio.o (i.GPIOPinConfigure)
+
+.emb_text 
+*          0    000012d4    0000002e     
+                  000012d4    00000026     driverlib.lib : cpu.o (.emb_text)
+                  000012fa    00000002     --HOLE-- [fill = 0]
+                  000012fc    00000006                   : sysctl.o (.emb_text)
+
+i.GPIODirModeSet 
+*          0    00001302    00000028     
+                  00001302    00000028     driverlib.lib : gpio.o (i.GPIODirModeSet)
+
+i.SysCtlPeripheralEnable 
+*          0    0000132c    00000028     
+                  0000132c    00000028     driverlib.lib : sysctl.o (i.SysCtlPeripheralEnable)
+
+i.uDMAChannelControlSet 
+*          0    00001354    00000020     
+                  00001354    00000020     driverlib.lib : udma.o (i.uDMAChannelControlSet)
+
+i.GPIOPinTypeGPIOOutput 
+*          0    00001374    0000001c     
+                  00001374    0000001c     driverlib.lib : gpio.o (i.GPIOPinTypeGPIOOutput)
+
+i.GPIOPinTypeUART 
+*          0    00001390    0000001c     
+                  00001390    0000001c     driverlib.lib : gpio.o (i.GPIOPinTypeUART)
+
+i.uDMAChannelEnable 
+*          0    000013ac    00000014     
+                  000013ac    00000014     driverlib.lib : udma.o (i.uDMAChannelEnable)
+
+i.TimerLoadSet 
+*          0    000013c0    00000012     
+                  000013c0    00000012     driverlib.lib : timer.o (i.TimerLoadSet)
+
+i.IntMasterEnable 
+*          0    000013d2    0000000e     
+                  000013d2    0000000e     driverlib.lib : interrupt.o (i.IntMasterEnable)
+
+i.TimerEnable 
+*          0    000013e0    0000000e     
+                  000013e0    0000000e     driverlib.lib : timer.o (i.TimerEnable)
+
+i.uDMAControlBaseSet 
+*          0    000013f0    0000000c     
+                  000013f0    0000000c     driverlib.lib : udma.o (i.uDMAControlBaseSet)
+
+i.uDMAEnable 
+*          0    000013fc    0000000c     
+                  000013fc    0000000c     driverlib.lib : udma.o (i.uDMAEnable)
+
+i.TimerIntEnable 
+*          0    00001408    00000008     
+                  00001408    00000008     driverlib.lib : timer.o (i.TimerIntEnable)
+
+i.UARTIntEnable 
+*          0    00001410    00000008     
+                  00001410    00000008     driverlib.lib : uart.o (i.UARTIntEnable)
+
+i.GPIOPinWrite 
+*          0    00001418    00000006     
+                  00001418    00000006     driverlib.lib : gpio.o (i.GPIOPinWrite)
+
+i.UARTClockSourceSet 
+*          0    0000141e    00000006     
+                  0000141e    00000006     driverlib.lib : uart.o (i.UARTClockSourceSet)
+
+.cinit     0    00001508    000000c8     
+                  00001508    000000a2     (.cinit..data.load) [load image, compression = lzss]
+                  000015aa    00000002     --HOLE-- [fill = 0]
+                  000015ac    0000000c     (__TI_handler_table)
+                  000015b8    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  000015c0    00000010     (__TI_cinit_table)
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+i.uDMAChannelAttributeDisable 
+*          0    00001424    00000048     
+                  00001424    00000048     driverlib.lib : udma.o (i.uDMAChannelAttributeDisable)
+
+i.SysCtlPeripheralReset 
+*          0    0000146c    0000003c     
+                  0000146c    0000003c     driverlib.lib : sysctl.o (i.SysCtlPeripheralReset)
+
+i.uDMAChannelAssign 
+*          0    000014a8    0000002c     
+                  000014a8    0000002c     driverlib.lib : udma.o (i.uDMAChannelAssign)
+
+i.SysCtlPeripheralDisable 
+*          0    000014d4    00000028     
+                  000014d4    00000028     driverlib.lib : sysctl.o (i.SysCtlPeripheralDisable)
+
+i.TimerDMAEventSet 
+*          0    000014fc    00000004     
+                  000014fc    00000004     driverlib.lib : timer.o (i.TimerDMAEventSet)
+
+i.TimerIntClear 
+*          0    00001500    00000004     
+                  00001500    00000004     driverlib.lib : timer.o (i.TimerIntClear)
+
+.bss       0    20000000    00000400     UNINITIALIZED
+                  20000000    00000400     (.common:uDMA_table)
+
+.stack     0    20000400    00000200     UNINITIALIZED
+                  20000400    00000200     --HOLE--
+
+.data      0    20000600    000000a0     UNINITIALIZED
+                  20000600    00000080     main.obj (.data:seno)
+                  20000680    0000000c     rtsv7M4_T_le_v4SPD16_eabi.lib : exit.obj (.data:$O1$$)
+                  2000068c    00000008                                   : _lock.obj (.data:$O1$$)
+                  20000694    00000008     main.obj (.data)
+                  2000069c    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : stkdepth_vars.obj (.data)
+
+MODULE SUMMARY
+
+       Module                         code   ro data   rw data
+       ------                         ----   -------   -------
+    .\
+       main.obj                       464    0         1160   
+       tm4c123gh6pm_startup_ccs.obj   12     620       0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         476    620       1160   
+                                                              
+    C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/rvmdk/driverlib.lib
+       sysctl.o                       790    596       0      
+       gpio.o                         482    552       0      
+       interrupt.o                    114    268       0      
+       udma.o                         336    0         0      
+       timer.o                        160    0         0      
+       uart.o                         124    0         0      
+       cpu.o                          38     0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         2044   1416      0      
+                                                              
+    C:\ti\ccsv7\tools\compiler\ti-cgt-arm_16.9.7.LTS\lib\rtsv7M4_T_le_v4SPD16_eabi.lib
+       memcpy_t2.obj                  156    0         0      
+       memset_t2.obj                  122    0         0      
+       autoinit.obj                   112    0         0      
+       copy_decompress_lzss.obj       104    0         0      
+       exit.obj                       84     0         12     
+       boot.obj                       84     0         0      
+       cpy_tbl.obj                    76     0         0      
+       _lock.obj                      20     0         8      
+       args_main.obj                  24     0         0      
+       copy_decompress_none.obj       14     0         0      
+       copy_zero_init.obj             12     0         0      
+       pre_init.obj                   4      0         0      
+       stkdepth_vars.obj              0      0         4      
+       mpu_init.obj                   2      0         0      
+       startup.obj                    2      0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         816    0         24     
+                                                              
+       Stack:                         0      0         512    
+       Linker Generated:              0      198       0      
+    +--+------------------------------+------+---------+---------+
+       Grand Total:                   3336   2234      1696   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 000015c0 records: 2, size/record: 8, table size: 16
+	.data: load addr=00001508, load size=000000a2 bytes, run addr=20000600, run size=000000a0 bytes, compression=lzss
+	.bss: load addr=000015b8, load size=00000008 bytes, run addr=20000000, run size=00000400 bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 000015ac records: 3, size/record: 4, table size: 12
+	index: 0, handler: __TI_decompress_lzss
+	index: 1, handler: __TI_decompress_none
+	index: 2, handler: __TI_zero_init
+
+
+FAR CALL TRAMPOLINES
+
+callee name               trampoline name
+   callee addr  tramp addr   call addr  call info
+--------------  -----------  ---------  ----------------
+TimerIntClear             $Tramp$TT$S$$TimerIntClear
+   00001501     00000d00     00000960   main.obj (.text)
+uDMAChannelAttributeDisable  $Tramp$TT$S$$uDMAChannelAttributeDisable
+   00001425     00000d08     000008f8   main.obj (.text)
+uDMAChannelAssign         $Tramp$TT$S$$uDMAChannelAssign
+   000014a9     00000d10     000008f0   main.obj (.text)
+TimerDMAEventSet          $Tramp$TT$S$$TimerDMAEventSet
+   000014fd     00000d18     000008c4   main.obj (.text)
+SysCtlPeripheralReset     $Tramp$TT$S$$SysCtlPeripheralReset
+   0000146d     00000d20     000007fe   main.obj (.text)
+                             00000878   main.obj (.text)
+                             000008d4   main.obj (.text)
+SysCtlPeripheralDisable   $Tramp$TT$S$$SysCtlPeripheralDisable
+   000014d5     00000d28     000007f8   main.obj (.text)
+                             00000872   main.obj (.text)
+                             000008ce   main.obj (.text)
+
+[6 trampolines]
+[10 trampoline calls]
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                           
+-------   ----                           
+00000c09  C$$EXIT                        
+000012f5  CPUbasepriGet                  
+000012ef  CPUbasepriSet                  
+000012d5  CPUcpsid                       
+000012e3  CPUcpsie                       
+000012dd  CPUprimask                     
+000012eb  CPUwfi                         
+000007f5  ConfigurePins                  
+0000086f  ConfigureTimers                
+00000823  ConfigureUART                  
+000008cb  ConfigureuDMA                  
+00001303  GPIODirModeSet                 
+00000e85  GPIOPadConfigSet               
+00001291  GPIOPinConfigure               
+00001375  GPIOPinTypeGPIOOutput          
+00001391  GPIOPinTypeUART                
+00001419  GPIOPinWrite                   
+000011cd  IntEnable                      
+000013d3  IntMasterEnable                
+00000cef  ResetISR                       
+UNDEFED   SHT$$INIT_ARRAY$$Base          
+UNDEFED   SHT$$INIT_ARRAY$$Limit         
+0000091f  SetTimerFreq                   
+00000d31  SysCtlClockGet                 
+00000fbd  SysCtlClockSet                 
+000012fd  SysCtlDelay                    
+000014d5  SysCtlPeripheralDisable        
+0000132d  SysCtlPeripheralEnable         
+0000146d  SysCtlPeripheralReset          
+0000095b  Timer0IntHandler               
+00001231  TimerConfigure                 
+000014fd  TimerDMAEventSet               
+000013e1  TimerEnable                    
+00001501  TimerIntClear                  
+00001409  TimerIntEnable                 
+000013c1  TimerLoadSet                   
+0000141f  UARTClockSourceSet             
+0000115d  UARTConfigSetExpClk            
+00001411  UARTIntEnable                  
+20000600  __STACK_END                    
+00000200  __STACK_SIZE                   
+20000600  __STACK_TOP                    
+000015c0  __TI_CINIT_Base                
+000015d0  __TI_CINIT_Limit               
+000015ac  __TI_Handler_Table_Base        
+000015b8  __TI_Handler_Table_Limit       
+00000add  __TI_auto_init                 
+20000680  __TI_cleanup_ptr               
+00000b4d  __TI_decompress_lzss           
+00000cd5  __TI_decompress_none           
+20000684  __TI_dtors_ptr                 
+20000688  __TI_enable_exit_profile_output
+ffffffff  __TI_pprof_out_hndl            
+ffffffff  __TI_prof_data_size            
+ffffffff  __TI_prof_data_start           
+00000000  __TI_static_base__             
+00000ce3  __TI_zero_init                 
+00000a61  __aeabi_memclr                 
+00000a61  __aeabi_memclr4                
+00000a61  __aeabi_memclr8                
+000009c5  __aeabi_memcpy                 
+000009c5  __aeabi_memcpy4                
+000009c5  __aeabi_memcpy8                
+00000a63  __aeabi_memset                 
+00000a63  __aeabi_memset4                
+00000a63  __aeabi_memset8                
+ffffffff  __binit__                      
+ffffffff  __c_args__                     
+00000adb  __mpu_init                     
+20000400  __stack                        
+00000ca9  _args_main                     
+00000bb5  _c_int00                       
+2000068c  _lock                          
+00000ccf  _nop                           
+00000cc7  _register_lock                 
+00000cc1  _register_unlock               
+00000cff  _system_post_cinit             
+00000cfb  _system_pre_init               
+20000690  _unlock                        
+00000c0d  abort                          
+ffffffff  binit                          
+00000c5d  copy_in                        
+00000c15  exit                           
+00000000  g_pfnVectors                   
+00000939  main                           
+2000069c  main_func_sp                   
+000009c5  memcpy                         
+00000a69  memset                         
+20000694  sen_frq                        
+20000696  sen_res                        
+20000600  seno                           
+000014a9  uDMAChannelAssign              
+00001425  uDMAChannelAttributeDisable    
+00001355  uDMAChannelControlSet          
+000013ad  uDMAChannelEnable              
+000010dd  uDMAChannelTransferSet         
+000013f1  uDMAControlBaseSet             
+000013fd  uDMAEnable                     
+20000000  uDMA_table                     
+20000698  uDMA_table_end                 
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                           
+-------   ----                           
+00000000  __TI_static_base__             
+00000000  g_pfnVectors                   
+00000200  __STACK_SIZE                   
+000007f5  ConfigurePins                  
+00000823  ConfigureUART                  
+0000086f  ConfigureTimers                
+000008cb  ConfigureuDMA                  
+0000091f  SetTimerFreq                   
+00000939  main                           
+0000095b  Timer0IntHandler               
+000009c5  __aeabi_memcpy                 
+000009c5  __aeabi_memcpy4                
+000009c5  __aeabi_memcpy8                
+000009c5  memcpy                         
+00000a61  __aeabi_memclr                 
+00000a61  __aeabi_memclr4                
+00000a61  __aeabi_memclr8                
+00000a63  __aeabi_memset                 
+00000a63  __aeabi_memset4                
+00000a63  __aeabi_memset8                
+00000a69  memset                         
+00000adb  __mpu_init                     
+00000add  __TI_auto_init                 
+00000b4d  __TI_decompress_lzss           
+00000bb5  _c_int00                       
+00000c09  C$$EXIT                        
+00000c0d  abort                          
+00000c15  exit                           
+00000c5d  copy_in                        
+00000ca9  _args_main                     
+00000cc1  _register_unlock               
+00000cc7  _register_lock                 
+00000ccf  _nop                           
+00000cd5  __TI_decompress_none           
+00000ce3  __TI_zero_init                 
+00000cef  ResetISR                       
+00000cfb  _system_pre_init               
+00000cff  _system_post_cinit             
+00000d31  SysCtlClockGet                 
+00000e85  GPIOPadConfigSet               
+00000fbd  SysCtlClockSet                 
+000010dd  uDMAChannelTransferSet         
+0000115d  UARTConfigSetExpClk            
+000011cd  IntEnable                      
+00001231  TimerConfigure                 
+00001291  GPIOPinConfigure               
+000012d5  CPUcpsid                       
+000012dd  CPUprimask                     
+000012e3  CPUcpsie                       
+000012eb  CPUwfi                         
+000012ef  CPUbasepriSet                  
+000012f5  CPUbasepriGet                  
+000012fd  SysCtlDelay                    
+00001303  GPIODirModeSet                 
+0000132d  SysCtlPeripheralEnable         
+00001355  uDMAChannelControlSet          
+00001375  GPIOPinTypeGPIOOutput          
+00001391  GPIOPinTypeUART                
+000013ad  uDMAChannelEnable              
+000013c1  TimerLoadSet                   
+000013d3  IntMasterEnable                
+000013e1  TimerEnable                    
+000013f1  uDMAControlBaseSet             
+000013fd  uDMAEnable                     
+00001409  TimerIntEnable                 
+00001411  UARTIntEnable                  
+00001419  GPIOPinWrite                   
+0000141f  UARTClockSourceSet             
+00001425  uDMAChannelAttributeDisable    
+0000146d  SysCtlPeripheralReset          
+000014a9  uDMAChannelAssign              
+000014d5  SysCtlPeripheralDisable        
+000014fd  TimerDMAEventSet               
+00001501  TimerIntClear                  
+000015ac  __TI_Handler_Table_Base        
+000015b8  __TI_Handler_Table_Limit       
+000015c0  __TI_CINIT_Base                
+000015d0  __TI_CINIT_Limit               
+20000000  uDMA_table                     
+20000400  __stack                        
+20000600  __STACK_END                    
+20000600  __STACK_TOP                    
+20000600  seno                           
+20000680  __TI_cleanup_ptr               
+20000684  __TI_dtors_ptr                 
+20000688  __TI_enable_exit_profile_output
+2000068c  _lock                          
+20000690  _unlock                        
+20000694  sen_frq                        
+20000696  sen_res                        
+20000698  uDMA_table_end                 
+2000069c  main_func_sp                   
+ffffffff  __TI_pprof_out_hndl            
+ffffffff  __TI_prof_data_size            
+ffffffff  __TI_prof_data_start           
+ffffffff  __binit__                      
+ffffffff  __c_args__                     
+ffffffff  binit                          
+UNDEFED   SHT$$INIT_ARRAY$$Base          
+UNDEFED   SHT$$INIT_ARRAY$$Limit         
+
+[100 symbols]
