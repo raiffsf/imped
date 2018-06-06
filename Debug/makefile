@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.7.LTS
+CG_TOOL_ROOT := D:/Programas/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.4.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -12,6 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
+"./uartstdio.obj" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/rvmdk/driverlib.lib" \
@@ -140,24 +141,23 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 
 # Tool invocations
 imped.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@echo 'Building target: "$@"'
+	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker'
-	"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"imped.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.7.LTS/lib" -i"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="imped_linkInfo.xml" --rom_model -o "imped.out" $(ORDERED_OBJS)
-	@echo 'Finished building target: "$@"'
+	"D:/Programas/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"imped.map" --heap_size=0 --stack_size=512 -i"D:/Programas/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.4.LTS/lib" -i"D:/Programas/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="imped_linkInfo.xml" --rom_model -o "imped.out" $(ORDERED_OBJS)
+	@echo 'Finished building target: $@'
 	@echo ' '
 
 imped.hex: $(EXE_OUTPUTS)
-	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: ARM Hex Utility'
-	"C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.7.LTS/bin/armhex"  -o "imped.hex" $(EXE_OUTPUTS__QUOTED)
-	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
+	"D:/Programas/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.4.LTS/bin/armhex"  -o "imped.hex" $(EXE_OUTPUTS__QUOTED)
+	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "uartstdio.obj" 
+	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "uartstdio.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
