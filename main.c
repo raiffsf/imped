@@ -114,6 +114,9 @@ void ConfigureTimers(void){
       TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
       TimerLoadSet(TIMER0_BASE, TIMER_A, (80000000-1)/((sen_frq*1000)*sen_res));
 
+      //TimerIntClear(TIMER0_BASE,TIMER_TIMA_DMA);
+      //TimerIntRegister(TIMER0_BASE,TIMER_A,Timer0IntHandler);
+      //TimerIntEnable(TIMER0_BASE,TIMER_TIMA_DMA);
 
       IntEnable(INT_TIMER0A);
 
@@ -173,6 +176,17 @@ void ConfigureuDMA(void)
 
       //Enable the DMA chanel
       uDMAChannelEnable(UDMA_CH18_TIMER0A);
+    /*
+        SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
+        uDMAEnable();
+        uDMAControlBaseSet(uDMA_table);
+        uDMAChannelAssign(UDMA_CH18_TIMER0A);
+        uDMAChannelControlSet(UDMA_CH18_TIMER0A | UDMA_PRI_SELECT, UDMA_SIZE_8 | UDMA_SRC_INC_8 | UDMA_DST_INC_NONE | UDMA_ARB_1);
+
+
+        uDMAChannelTransferSet(UDMA_CH18_TIMER0A | UDMA_PRI_SELECT, UDMA_MODE_BASIC, (void *)seno, (void *)(GPIO_PORTB_BASE + 0x3FC), 128);
+        uDMAChannelEnable(UDMA_CH18_TIMER0A);
+*/
 }
 
 void SetTimerFreq(uint32_t timer, uint32_t freq){
