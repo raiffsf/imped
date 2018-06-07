@@ -197,6 +197,9 @@ void ConfigureuDMA(void)
         uDMAChannelEnable(UDMA_CH18_TIMER0A);
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of b92bbad... changes
+=======
 >>>>>>> parent of b92bbad... changes
 =======
 >>>>>>> parent of b92bbad... changes
