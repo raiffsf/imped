@@ -12,6 +12,8 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
+"./uart.obj" \
+"./uartstdio.obj" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/rvmdk/driverlib.lib" \
@@ -156,8 +158,8 @@ imped.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "uart.obj" "uartstdio.obj" 
+	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "uart.d" "uartstdio.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
