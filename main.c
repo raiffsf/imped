@@ -124,25 +124,10 @@ void ConfigureTimers(void){
 
       IntEnable(INT_TIMER1A);
 
-
-      SysCtlPeripheralDisable(SYSCTL_PERIPH_TIMER0);
-      SysCtlPeripheralReset(SYSCTL_PERIPH_TIMER0);
-      SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
-      SysCtlDelay(10);
-
-      TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
-      TimerLoadSet(TIMER0_BASE, TIMER_A, (80000000-1)/((128*sen_frq*1000)*sen_res));
-
-
-      IntEnable(INT_TIMER0A);
-
       TimerIntEnable( TIMER1_BASE, TIMER_TIMA_TIMEOUT );
       IntMasterEnable();
-      TimerIntEnable( TIMER0_BASE, TIMER_TIMA_TIMEOUT );
-
       //TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
       TimerDMAEventSet(TIMER1_BASE,TIMER_DMA_TIMEOUT_A);
-      TimerDMAEventSet(TIMER0_BASE,TIMER_DMA_TIMEOUT_A);
 
 }
 
@@ -308,50 +293,72 @@ void main()
 {
 
     SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
-
-    //
-    // Set up the serial console to use for displaying messages.  This is
-    // just for this example program and is not needed for ADC operation.
-    //
     InitConsole();
-    ConfigureADC();
-
-    IntMasterEnable();
-    ConfigureTimers();
-    ConfigurePins();
     ConfigureuDMA();
-    TimerEnable(TIMER1_BASE, TIMER_A);
+    ConfigureTimers();
+
+    // ***** ADC STUFF *****
 
     while(1)
     {
-        if(adc_start == 1)
-        {
-            TimerEnable(TIMER0_BASE, TIMER_A);
-            adc_start = 0;
-        }
-       if(i>120)
+
+    // The ADC0 peripheral must be enabled for use.
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0);
+
+    // Enable the GPIO port that hosts the ADC
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
+
+    // Select the analog ADC function for PE3.
+    GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_1);
+
+    ADCSequenceConfigure(ADC0_BASE, 3, ADC_TRIGGER_TIMER, 0);
+    ADCSequenceStepConfigure(ADC0_BASE, 3, 0, ADC_CTL_CH0 | ADC_CTL_IE | ADC_CTL_END);
+    // Since sample sequence 2 is now configured, it must be enabled.
+    ADCSequenceEnable(ADC0_BASE, 3);
+
+    // Clear the interrupt status flag.
+    ADCIntClear(ADC0_BASE, 3);
+
+
+
+    // Enable the Timer peripheral
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+
+    // Timer should run periodically
+    TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
+
+    // Set the value that is loaded into the timer everytime it finishes
+    //   it's the number of clock cycles it takes till the timer triggers the ADC
+    //TimerLoadSet(TIMER0_BASE, TIMER_A, SysCtlClockGet()/F_SAMPLE);
+    TimerLoadSet(TIMER0_BASE, TIMER_A, (1/80000000)*((1/10000)/128));
+    // Enable triggering
+    TimerControlTrigger(TIMER0_BASE, TIMER_A, true);
+
+
+    // Enable processor interrupts.
+    IntMasterEnable();
+
+    ADCIntEnable(ADC0_BASE, 3);
+    IntEnable(INT_ADC0SS3);
+    // Enable the timer
+    TimerEnable(TIMER0_BASE, TIMER_A);
+
+        if(i>120)
         {
             i=0;
-            TimerIntClear(TIMER1_BASE,TIMER_TIMA_DMA);
-            TimerIntClear(TIMER0_BASE,TIMER_CAPA_EVENT);
-//            TimerDisable(TIMER1_BASE, TIMER_A);
-//            TimerDisable(TIMER0_BASE, TIMER_A);
             int j;
             for(j = 0; j < 120; j++)
             {
-                UARTprintf("%d",adc_buffer[j]);
-                SysCtlDelay(SysCtlClockGet()/96);
+                UARTprintf("%d\n", adc_buffer[j]);
+                SysCtlDelay(SysCtlClockGet() / 96);
             }
-//            TimerEnable(TIMER1_BASE, TIMER_A);
-//            TimerEnable(TIMER0_BASE, TIMER_A);
-
         }
-    }
+        SysCtlDelay(SysCtlClockGet() / (3 * 1000000));
+     }
 }
 
 void Timer1IntHandler(void)
 {
-    adc_start = 1;
     TimerIntClear(TIMER1_BASE,TIMER_TIMA_DMA);
 
     uDMAChannelTransferSet(UDMA_CH18_TIMER1A | UDMA_PRI_SELECT,
@@ -373,7 +380,6 @@ void ADC0IntHandler(void) {
     ADCIntClear(ADC0_BASE, 3);
 
     ADCSequenceDataGet(ADC0_BASE, 3, pui32ADC0Value);
-    adc_buffer[i]=pui32ADC0Value[0];
+    adc_buffer[i] = pui32ADC0Value[0];
     i++;
-
 }
