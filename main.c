@@ -196,6 +196,9 @@ void ConfigureuDMA(void)
         uDMAChannelTransferSet(UDMA_CH18_TIMER0A | UDMA_PRI_SELECT, UDMA_MODE_BASIC, (void *)seno, (void *)(GPIO_PORTB_BASE + 0x3FC), 128);
         uDMAChannelEnable(UDMA_CH18_TIMER0A);
 */
+<<<<<<< HEAD
+>>>>>>> parent of b92bbad... changes
+=======
 >>>>>>> parent of b92bbad... changes
 }
 
